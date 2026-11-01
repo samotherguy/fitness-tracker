@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#fff4f7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="FORM" />
+  <meta name="description" content="A strength training tracker, with Frito and Ramona." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>FORM</title>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">FORM</div>
+    <div class="topbar-right">
+      <span class="date-label" id="today-label"></span>
+      <button class="icon-btn" id="settings-btn" aria-label="Settings">
+        <svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="view active" id="view-home">
+      <p class="eyebrow" id="greeting">Hello</p>
+      <h1 class="large-title">Let's <span class="accent">lift.</span></h1>
+      <div class="hero-cats">
+        <button class="cat cat-frito" data-cat="frito" aria-label="Frito"><img class="base" src="cats/frito_sit.webp" alt=""><img class="blink" src="cats/frito_sit_blink.webp" alt=""><img class="meow" src="cats/frito_sit_meow.webp" alt=""><img class="bow" src="cats/frito_bow.webp" alt=""></button>
+        <button class="cat cat-ramona" data-cat="ramona" aria-label="Ramona"><img class="base" src="cats/ramona_sit.webp" alt=""><img class="blink" src="cats/ramona_sit_blink.webp" alt=""><img class="meow" src="cats/ramona_sit_meow.webp" alt=""><img class="bow" src="cats/ramona_bow.webp" alt=""></button>
+        <div class="cat-caption" id="cat-caption" aria-live="polite"></div>
+      </div>
+
+      <article class="feature-card" id="next-workout-card">
+        <div class="feature-top"><span class="tag" id="next-tag">UP NEXT</span><span class="feature-day" id="next-day-label"></span></div>
+        <h2 id="next-workout-name">Push A</h2>
+        <p id="next-workout-desc">Chest · Shoulders · Triceps</p>
+        <div class="feature-meta"><span id="next-workout-duration"></span><span id="next-workout-count"></span></div>
+        <button class="btn btn-white" id="start-next-btn">Start workout</button>
+      </article>
+
+      <div class="section-heading"><h2>Your activity</h2><button class="text-btn" data-nav="progress">See all</button></div>
+      <div class="stat-grid">
+        <div class="card stat-card"><span class="stat-label">Sessions</span><strong id="stat-sessions">0</strong><span class="stat-foot">completed</span></div>
+        <div class="card stat-card"><span class="stat-label">Volume</span><strong id="stat-volume">0</strong><span class="stat-foot">kg moved</span></div>
+        <div class="card stat-card"><span class="stat-label">Records</span><strong id="stat-prs">0</strong><span class="stat-foot">personal bests</span></div>
+        <div class="card stat-card"><span class="stat-label">Streak</span><strong id="stat-streak">0</strong><span class="stat-foot">days in a row</span></div>
+      </div>
+
+      <div class="section-heading"><h2>This week</h2><button class="text-btn" data-nav="programme">Plan</button></div>
+      <div class="week-strip" id="week-strip"></div>
+    </section>
+
+    <!-- PROGRAMME -->
+    <section class="view" id="view-programme">
+      <p class="eyebrow">Full body · 3× a week</p>
+      <h1 class="large-title">Programme</h1>
+      <div class="chip-row" id="programme-tabs"></div>
+      <div class="card programme-detail" id="programme-detail"></div>
+      <button class="btn btn-pink full" id="start-programme-btn">Start this workout</button>
+      <p class="microcopy">Tap any exercise to swap it or change sets and reps.</p><button class="text-btn center-btn" id="reset-plans">Reset to default programme</button>
+    </section>
+
+    <!-- WORKOUT -->
+    <section class="view" id="view-workout">
+      <div class="workout-header">
+        <button class="back-btn" id="exit-workout" aria-label="Leave workout"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="workout-title"><span class="live-dot">LIVE</span><h2 id="active-workout-title">Push A</h2></div>
+        <button class="cat cat-live" id="live-cat" aria-label="Frito"><img class="base" src="cats/frito_alert.webp" alt=""><img class="meow" src="cats/frito_alert_meow.webp" alt=""></button>
+      </div>
+      <div class="workout-progress">
+        <div class="progress-copy"><span id="completed-copy">0 of 0 sets</span><span id="workout-percent">0%</span></div>
+        <div class="progress-track"><div id="workout-progress-bar"></div></div>
+      </div>
+      <div id="active-exercises"></div>
+      <div class="workout-footer">
+        <div class="rest-bar" id="rest-bar"></div>
+        <button class="btn btn-pink full" id="finish-workout-btn">Finish workout</button>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="view" id="view-progress">
+      <p class="eyebrow">The big picture</p>
+      <h1 class="large-title">Progress</h1>
+      <div class="progress-summary">
+        <div class="card"><span class="stat-label">Sessions</span><strong id="progress-total-sessions">0</strong></div>
+        <div class="card"><span class="stat-label">Total volume</span><strong id="progress-total-volume">0 kg</strong></div>
+      </div>
+      <div class="card panel"><div class="panel-head"><h3>Weekly volume</h3><span class="panel-unit">kg</span></div><div class="chart" id="volume-chart"></div></div>
+      <div class="card panel"><div class="panel-head"><h3>Personal records</h3><span class="panel-unit">best lifts</span></div><div id="pr-list"></div></div>
+      <div class="card panel"><div class="panel-head"><h3>History</h3></div><div id="history-list"></div></div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section class="view" id="view-library">
+      <p class="eyebrow">Know your moves</p>
+      <h1 class="large-title">Library</h1>
+      <label class="search-box"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input id="exercise-search" type="search" placeholder="Search" autocomplete="off" /></label>
+      <div class="chip-row" id="library-filters"></div>
+      <div class="card list" id="exercise-list"></div>
+    </section>
+  </main>
+
+  <nav class="tab-bar" aria-label="Main navigation">
+    <button class="tab active" data-nav="home"><svg viewBox="0 0 24 24"><path d="M3.5 11 12 3.5l8.5 7.5V20a1 1 0 0 1-1 1h-5v-6h-5v6h-5a1 1 0 0 1-1-1Z"/></svg><small>Home</small></button>
+    <button class="tab" data-nav="programme"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2.5v4M16 2.5v4" stroke="var(--tab-bg)" stroke-width="2" stroke-linecap="round"/></svg><small>Plan</small></button>
+    <button class="tab tab-start" data-nav="workout"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg><small>Workout</small></button>
+    <button class="tab" data-nav="progress"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="4.5" height="9" rx="1.5"/><rect x="9.75" y="7" width="4.5" height="14" rx="1.5"/><rect x="16.5" y="3" width="4.5" height="18" rx="1.5"/></svg><small>Progress</small></button>
+    <button class="tab" data-nav="library"><svg viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5Zm9-1.5h5.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5H13Z"/></svg><small>Library</small></button>
+  </nav>
+</div>
+
+<div class="sheet-backdrop" id="sheet" hidden><div class="sheet" id="sheet-body" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
